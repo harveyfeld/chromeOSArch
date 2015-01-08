@@ -5,7 +5,7 @@ function start {
 	umount /dev/${sd}*;
 
 	echo "Creating disk label for GPT";
-	parted /dev/$sd mklabel gpt;
+	partx -t gpt -u /dev/$sd;
 	
 	echo "Creating partitions"; 
 	cgpt create -z /dev/$sd;
@@ -15,12 +15,12 @@ function start {
 	cgpt add -i 12 -t data -b 73728 -s 32768 -l Script /dev/$sd;
 	
 	cgpt show /dev/$sd;
-	echo "How large do you want your root partition?"
+	echo "How large do you want your root partition?";
 	read size;
 	cgpt add -i 3 -t data -b 106496 -s `expr $size - 106496` -l Root /dev/$sd;
 	
 	echo "Refreshing disk partition list";
-	partprobe /dev/$sd;
+	partx -l /dev/mmcblk;
 	
 	echo "Formating new partitions";
 	mkfs.ext2 /dev/${sd}p2;
@@ -28,10 +28,9 @@ function start {
 	mkfs.vfat -F 16 /dev/${sd}p12;
 	
 	echo "Moving to tmp folder";	
-	cd /tmp
+	cd /tmp;
 	
 	echo "Downloading latest version of Arch chromebook...";
-	wget -N http://archlinuxarm.org/os/ArchLinuxARM-chromebook-latest.tar.gz;
 	
 	mkdir root;
 	echo "Mounting root partition in tmp to extract Arch";
@@ -44,9 +43,10 @@ function start {
 	umount mnt;
 	
 	mount /dev/${sd}p12 mnt;
-	mkdir mnt/u-boot
-	cp root/boot/boot.scr.uimg mnt/u-boot
-	umount mnt
+	mkdir mnt/u-boot;
+	wget http://archlinuxarm.org/os/exynos/boot.scr.uimg;
+	cp boot.scr.uimg mnt/u-boot;
+	umount mnt;
 
 	wget -O - http://commondatastorage.googleapis.com/chromeos-localmirror/distfiles/nv_uboot-snow.kpart.bz2 | bunzip2 > nv_uboot-snow.kpart;
 	dd if=nv_uboot-snow.kpart of=/dev/${sd}p1;
