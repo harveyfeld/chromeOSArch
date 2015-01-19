@@ -20,7 +20,7 @@ function start {
 	cgpt add -i 3 -t data -b 106496 -s `expr $size - 106496` -l Root /dev/$sd;
 	
 	echo "Refreshing disk partition list";
-	partx -l /dev/mmcblk;
+	partx -l /dev/$sd;
 	
 	echo "Formating new partitions";
 	mkfs.ext2 /dev/${sd}p2;
@@ -31,6 +31,7 @@ function start {
 	cd /tmp;
 	
 	echo "Downloading latest version of Arch chromebook...";
+	wget http://archlinuxarm.org/os/ArchLinuxARM-chromebook-latest.tar.gz;
 	
 	mkdir root;
 	echo "Mounting root partition in tmp to extract Arch";
