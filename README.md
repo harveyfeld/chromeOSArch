@@ -4,6 +4,8 @@ This interactive bash script will install Arch Linux ARM onto your SD card or US
 <h4>Installation guide for XE303C12</h4>
 We need access to root for this script to work, we can get access by enabling developer mode.
 
+The latest image of Arch Linux ARM seems to have broken drivers for wifi. Use http://rollback.archlinuxarm.org/os/ for older working versions of Arch.
+
 <b>Enabling developer mode</b>
 
 1. Turn off device.
