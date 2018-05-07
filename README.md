@@ -35,7 +35,7 @@ We cannot boot onto the our USB or SD card until we allow it via root.
 Login as root in ChromeOS, then enter the following commands:
 ```
 cd /tmp
-curl -O https://raw.githubusercontent.com/NomCycle/chromeOSArch/master/chromeOSArch.sh
+curl -O https://raw.githubusercontent.com/harveyfeld/chromeOSArch/patch-1/chromeOSArch.sh
 bash chromeOSArch.sh
 ```
 
