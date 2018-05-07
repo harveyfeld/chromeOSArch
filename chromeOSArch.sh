@@ -36,7 +36,7 @@ function start {
 	mkdir root;
 	echo "Mounting root partition in tmp to extract Arch";
 	mount /dev/${sd}p3 root;
-	tar -xvzf ArchLinuxARM-chromebook-latest.tar.gz -C root;
+	tar -xvzf ArchLinuxARM-armv7-chromebook-latest.tar.gz -C root;
 	
 	mkdir mnt;
 	mount /dev/${sd}p2 mnt;
