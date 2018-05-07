@@ -31,7 +31,7 @@ function start {
 	cd /tmp;
 	
 	echo "Downloading latest version of Arch chromebook...";
-	wget http://os.archlinuxarm.org/os/ArchLinuxARM-armv7-chromebook-latest.tar.gz;
+	curl -LO http://os.archlinuxarm.org/os/ArchLinuxARM-armv7-chromebook-latest.tar.gz;
 	
 	mkdir root;
 	echo "Mounting root partition in tmp to extract Arch";
