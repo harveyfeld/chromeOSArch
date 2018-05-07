@@ -45,11 +45,11 @@ function start {
 	
 	mount /dev/${sd}p12 mnt;
 	mkdir mnt/u-boot;
-	wget http://archlinuxarm.org/os/exynos/boot.scr.uimg;
+	sudo -u chronos wget http://archlinuxarm.org/os/exynos/boot.scr.uimg;
 	cp boot.scr.uimg mnt/u-boot;
 	umount mnt;
 
-	wget -O - http://commondatastorage.googleapis.com/chromeos-localmirror/distfiles/nv_uboot-snow.kpart.bz2 | bunzip2 > nv_uboot-snow.kpart;
+	sudo -u chronos wget -O - http://commondatastorage.googleapis.com/chromeos-localmirror/distfiles/nv_uboot-snow.kpart.bz2 | bunzip2 > nv_uboot-snow.kpart;
 	dd if=nv_uboot-snow.kpart of=/dev/${sd}p1;
 
 	umount root;
